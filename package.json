@@ -1,0 +1,91 @@
+{
+  "name": "messageformat",
+  "version": "0.0.1",
+  "description": "i18n message formating, all inclusive",
+  "author": "Adrien Gibrat <adrien.gibrat@gmail.com>",
+  "license": "(WTFPL OR MIT)",
+  "main": "dist/messageformat.js",
+  "bin": "dist/messageformat",
+  "jsnext:main": "src/index.js",
+  "engines": {
+    "npm": ">= 2.0.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "comma-style": [
+        "warn",
+        "first"
+      ],
+      "operator-linebreak": [
+        "warn",
+        "before",
+        {
+          "overrides": {
+            "?": "after"
+          }
+        }
+      ],
+      "curly": [
+        "warn",
+        "multi",
+        "consistent"
+      ],
+      "yoda": [
+        "warn",
+        "always"
+      ],
+      "quotes": [
+        "warn",
+        "single",
+        {
+          "allowTemplateLiterals": true,
+          "avoidEscape": true
+        }
+      ],
+      "no-new-func": "off"
+    }
+  },
+  "scripts": {
+    "start": "npm run build -- --watch --format umd --banner ''",
+    "build": "rollup --config",
+    "bin": "npm run bin:messageformat && npm run bin:plural && npm run bin:currency && npm run bin:list",
+    "bin:messageformat": "npm run build -- --input src/bin.js --output dist/bin/messageformat && chmod +x dist/bin/messageformat",
+    "bin:plural": "npm run build -- --input src/cldr/plural/index.js --output dist/bin/plural && chmod +x dist/bin/plural",
+    "bin:currency": "npm run build -- --input src/cldr/currency/index.js --output dist/bin/currency && chmod +x dist/bin/currency",
+    "bin:list": "npm run build -- --input src/cldr/list/index.js --output dist/bin/list && chmod +x dist/bin/list",
+    "init": "npm run bin:messageformat && npm run init:plural && npm run init:currency && npm run init:list",
+    "init:plural": "npm run bin:plural && dist/bin/plural | uglifyjs --beautify -- - > dist/plurals.js",
+    "init:currency": "npm run bin:currency && dist/bin/currency | uglifyjs --beautify -- - > dist/currencies.js",
+    "init:list": "npm run bin:list && dist/bin/list | uglifyjs --beautify -- - > dist/lists.js",
+    "size": "echo \"raw `cat dist/messageformat.js | npm run size:fmt --silent`\"",
+    "size:bin": "echo \"raw `cat dist/messageformat | npm run size:fmt --silent`\"",
+    "size:fmt": "wc -c | numfmt --to=iec-i --suffix=B",
+    "up": "ncu"
+  },
+  "devDependencies": {
+    "cldr-core": "^29.0.0",
+    "cldr-misc-modern": "^29.0.0",
+    "eslint": "^3.2.2",
+    "npm-check-updates": "^2.8.0",
+    "rollup": "^0.34.7",
+    "rollup-plugin-buble": "^0.12.1",
+    "rollup-plugin-eslint": "^2.0.2",
+    "rollup-plugin-includepaths": "0.1.5",
+    "rollup-watch": "^2.5.0",
+    "uglify-js": "^2.7.0"
+  }
+}
