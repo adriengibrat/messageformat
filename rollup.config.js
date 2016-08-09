@@ -5,12 +5,12 @@ import eslint from 'rollup-plugin-eslint'
 const project = require( './package.json' )
 
 export default {
-	format: 'cjs'
+	format: 'umd'
 	, entry: project['jsnext:main']
 	, dest: project.main
 	, moduleName: project.name
 	, moduleId: project.name
-	, banner: `#!/usr/bin/env node`
+	//, banner: `#!/usr/bin/env node`
 	, intro: `
 /**
  * ${project.name} ${project.version} – ${project.description}
