@@ -5,8 +5,18 @@
   "author": "Adrien Gibrat <adrien.gibrat@gmail.com>",
   "license": "(WTFPL OR MIT)",
   "main": "dist/messageformat.js",
-  "bin": "dist/messageformat",
   "jsnext:main": "src/index.js",
+  "bin": {
+    "messageformat" : "dist/bin/messageformat",
+    "plural" : "dist/bin/plural",
+    "currency" : "dist/bin/currency",
+    "list" : "dist/bin/list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:adriengibrat/messageformat.git"
+  },
+  "keywords": "browser, messageformat, i18n",
   "engines": {
     "npm": ">= 2.0.0"
   },
@@ -73,14 +83,14 @@
     "data": "npm run data:plural && npm run data:currency && npm run data:list",
     "data:plural": "dist/bin/plural | uglifyjs --beautify -- - > dist/plurals.js && dist/bin/plural --ordinal | uglifyjs --beautify -- - > dist/ordinals.js",
     "data:currency": "dist/bin/currency | uglifyjs --beautify -- - > dist/currencies.js",
-    "data:list": "dist/bin/list | uglifyjs --beautify -- - > dist/lists.js",
-    "up": "npm-check-updates"
+    "data:list": "dist/bin/list | uglifyjs --beautify -- - > dist/lists.js"
+  },
+  "dependencies": {
+    "cldr-core": "^29.0.0",
+    "cldr-misc-modern": "^29.0.0"
   },
   "devDependencies": {
-    "cldr-core": "^29.0.0",
-    "cldr-misc-modern": "^29.0.0",
     "eslint": "^3.2.2",
-    "npm-check-updates": "^2.8.0",
     "rollup": "^0.34.7",
     "rollup-plugin-buble": "^0.12.1",
     "rollup-plugin-eslint": "^2.0.2",
