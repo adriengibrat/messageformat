@@ -1,0 +1,49 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "comma-style": [
+      "warn",
+      "first"
+    ],
+    "operator-linebreak": [
+      "warn",
+      "before",
+      {
+        "overrides": {
+          "?": "after"
+        }
+      }
+    ],
+    "curly": [
+      "warn",
+      "multi",
+      "consistent"
+    ],
+    "yoda": [
+      "warn",
+      "always"
+    ],
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "no-new-func": "off"
+  }
+}

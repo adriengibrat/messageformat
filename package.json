@@ -7,10 +7,10 @@
   "main": "dist/messageformat.js",
   "jsnext:main": "src/index.js",
   "bin": {
-    "messageformat" : "dist/bin/messageformat",
-    "plural" : "dist/bin/plural",
-    "currency" : "dist/bin/currency",
-    "list" : "dist/bin/list"
+    "messageformat": "dist/bin/messageformat",
+    "plural": "dist/bin/plural",
+    "currency": "dist/bin/currency",
+    "list": "dist/bin/list"
   },
   "repository": {
     "type": "git",
@@ -19,55 +19,6 @@
   "keywords": "browser, messageformat, i18n",
   "engines": {
     "npm": ">= 2.0.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
-    },
-    "extends": "eslint:recommended",
-    "rules": {
-      "semi": [
-        "warn",
-        "never"
-      ],
-      "comma-style": [
-        "warn",
-        "first"
-      ],
-      "operator-linebreak": [
-        "warn",
-        "before",
-        {
-          "overrides": {
-            "?": "after"
-          }
-        }
-      ],
-      "curly": [
-        "warn",
-        "multi",
-        "consistent"
-      ],
-      "yoda": [
-        "warn",
-        "always"
-      ],
-      "quotes": [
-        "warn",
-        "single",
-        {
-          "allowTemplateLiterals": true,
-          "avoidEscape": true
-        }
-      ],
-      "no-new-func": "off"
-    }
   },
   "scripts": {
     "start": "npm run build -- --watch",
@@ -85,8 +36,8 @@
     "data:currency": "dist/bin/currency | uglifyjs --beautify -- - > dist/currencies.js",
     "data:list": "dist/bin/list | uglifyjs --beautify -- - > dist/lists.js"
   },
-  "dependencies": {
-    "cldr-core": "^29.0.0",
+  "optionalDependencies": {
+    "messageformat.currencies": "^29.0.0",
     "cldr-misc-modern": "^29.0.0"
   },
   "devDependencies": {
@@ -96,6 +47,7 @@
     "rollup-plugin-eslint": "^2.0.2",
     "rollup-plugin-includepaths": "0.1.5",
     "rollup-watch": "^2.5.0",
-    "uglify-js": "^2.7.0"
+    "uglify-js": "^2.7.0",
+    "lerna": "2.0.0-beta.26"
   }
 }

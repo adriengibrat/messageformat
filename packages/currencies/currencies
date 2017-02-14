@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+/**
+ * messageformat.currencies 0.0.1 – list currencies per region
+ * Made with ♫·♪ & -♥- by Adrien Gibrat <adrien.gibrat@gmail.com>
+ * Published under (WTFPL OR MIT) License
+ */
+
+'use strict';
+
+function parse (data, historical) {
+	return Object.keys(data)
+		.reduce(function (map, region) {
+			var history = {}
+			var currencies = data[region]
+				.reduce(function (local, currencies) { return local.concat(
+						Object.keys(currencies)
+							.reduce(function (list, name) {
+								var currency = currencies[name]
+								history[name] = currency._from
+								return !historical && (!currency._from || currency._to) ?
+									list
+									: list.concat(name)
+							}, [])
+					); }
+				, [])
+			if (currencies.length)
+				map[region] = currencies.sort(function (a, b) { return history[a] > history[b] ? history[a] ? -1 : 0 : 1; })
+			return map
+		}, {})
+}
+
+var currencies = parse(require('cldr-core/supplemental/currencyData.json').supplemental.currencyData.region)
+
+// format source with UMD loader
+function umd (name, factory) {
+	// small UMD loader
+	var loader = function (root, name, factory) {
+		/* global define: false, exports: false, module: false */
+		if ('function' === typeof define && define.amd)
+			define(name, factory())
+		else if ('object' === typeof exports)
+			module.exports = factory()
+		else
+			root[name] = factory()
+	}
+	return ("(" + loader + ")(this, \"" + name + "\", " + factory + ");")
+}
+
+// eslint-disable-next-line no-console
+console.log(umd('currency', ("function () { return " + (JSON.stringify(currencies)) + " }") ))

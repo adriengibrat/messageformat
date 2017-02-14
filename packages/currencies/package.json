@@ -1,0 +1,40 @@
+{
+  "name": "messageformat.currencies",
+  "version": "0.0.1",
+  "description": "list currencies per region",
+  "author": "Adrien Gibrat <adrien.gibrat@gmail.com>",
+  "license": "(WTFPL OR MIT)",
+  "main": "currencies.js",
+  "bin:main": "src/bin.js",
+  "jsnext:main": "src/index.js",
+  "bin": {
+    "currencies": "currencies"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:adriengibrat/messageformat.git"
+  },
+  "keywords": "browser, messageformat, i18n, currencies, cldr",
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 2.0.0"
+  },
+  "scripts": {
+    "start": "npm run build -- --watch",
+    "build": "rollup --config",
+    "make": "./$npm_package_bin_currencies | uglifyjs --beautify -- - > $npm_package_main",
+    "postinstall": "npm run build && chmod +x $npm_package_bin_currencies && npm run make"
+  },
+  "dependencies": {
+    "cldr-core": "^29.0.0"
+  },
+  "devDependencies": {
+    "eslint": "file:../../node_modules/eslint",
+    "rollup": "file:../../node_modules/rollup",
+    "rollup-plugin-buble": "file:../../node_modules/rollup-plugin-buble",
+    "rollup-plugin-eslint": "file:../../node_modules/rollup-plugin-eslint",
+    "rollup-plugin-includepaths": "file:../../node_modules/rollup-plugin-includepaths",
+    "rollup-watch": "file:../../node_modules/rollup-watch",
+    "uglify-js": "file:../../node_modules/uglify-js"
+  }
+}
