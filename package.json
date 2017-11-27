@@ -1,0 +1,101 @@
+{
+  "name": "messageformat",
+  "version": "0.0.1",
+  "description": "i18n message formating, all inclusive",
+  "author": "Adrien Gibrat <adrien.gibrat@gmail.com>",
+  "license": "(WTFPL OR MIT)",
+  "main": "dist/messageformat.js",
+  "jsnext:main": "src/index.js",
+  "bin": {
+    "messageformat" : "dist/bin/messageformat",
+    "plural" : "dist/bin/plural",
+    "currency" : "dist/bin/currency",
+    "list" : "dist/bin/list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:adriengibrat/messageformat.git"
+  },
+  "keywords": ["browser", "messageformat", "i18n"],
+  "engines": {
+    "npm": ">= 2.0.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "comma-style": [
+        "warn",
+        "first"
+      ],
+      "operator-linebreak": [
+        "warn",
+        "before",
+        {
+          "overrides": {
+            "?": "after"
+          }
+        }
+      ],
+      "curly": [
+        "warn",
+        "multi",
+        "consistent"
+      ],
+      "yoda": [
+        "warn",
+        "always"
+      ],
+      "quotes": [
+        "warn",
+        "single",
+        {
+          "allowTemplateLiterals": true,
+          "avoidEscape": true
+        }
+      ],
+      "no-new-func": "off"
+    }
+  },
+  "scripts": {
+    "start": "npm run build -- --watch",
+    "test": "./dist/bin/messageformat --locale en-US --currency --debug < test/messages.json | uglifyjs --beautify -- - > test/i18n.js",
+    "build": "rollup --config",
+    "build:bin": "npm run build -- --format cjs --banner '#!/usr/bin/env node'",
+    "postinstall": "npm run bin && npm run data && npm run build",
+    "bin": "npm run bin:messageformat && npm run bin:plural && npm run bin:currency && npm run bin:list",
+    "bin:messageformat": "npm run build:bin -- --input src/bin.js --output dist/bin/messageformat && chmod +x dist/bin/messageformat",
+    "bin:plural": "npm run build:bin -- --input src/cldr/plural/index.js --output dist/bin/plural && chmod +x dist/bin/plural",
+    "bin:currency": "npm run build:bin -- --input src/cldr/currency/index.js --output dist/bin/currency && chmod +x dist/bin/currency",
+    "bin:list": "npm run build:bin -- --input src/cldr/list/index.js --output dist/bin/list && chmod +x dist/bin/list",
+    "data": "npm run data:plural && npm run data:currency && npm run data:list",
+    "data:plural": "dist/bin/plural | uglifyjs --beautify -- - > dist/plurals.js && dist/bin/plural --ordinal | uglifyjs --beautify -- - > dist/ordinals.js",
+    "data:currency": "dist/bin/currency | uglifyjs --beautify -- - > dist/currencies.js",
+    "data:list": "dist/bin/list | uglifyjs --beautify -- - > dist/lists.js"
+  },
+  "dependencies": {
+    "cldr-core": "^29.0.0",
+    "cldr-misc-modern": "^29.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.2.2",
+    "rollup": "^0.34.7",
+    "rollup-plugin-buble": "^0.12.1",
+    "rollup-plugin-eslint": "^2.0.2",
+    "rollup-plugin-includepaths": "0.1.5",
+    "rollup-watch": "^2.5.0",
+    "uglify-js": "^2.7.0"
+  }
+}
