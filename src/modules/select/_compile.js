@@ -16,7 +16,7 @@ function compileOptions (runtime, type, key, params, offset) {
 	// check options
 	const keys = Object.keys(options)
 	// 'other' option is specified
-	if (!options.hasOwnProperty('other'))
+	if (!Object.hasOwnProperty.call(options, 'other'))
 		error('mandatory %s "other" option is missing (found %j) in message %j with %j locale'
 			, type, keys, runtime.id, runtime.locale)
 	// check plural / selectordinal types
@@ -28,7 +28,7 @@ function compileOptions (runtime, type, key, params, offset) {
 			warn('unknown %s %j (locale %j only accepts %j) found in message %j with %j locale'
 			, type, unknown, runtime.locale, types, runtime.id, runtime.locale)
 		// check plural type actually used by locale but not specified in message
-		const forgotten = types.filter(option => !options.hasOwnProperty(option))
+		const forgotten = types.filter(option => !Object.hasOwnProperty.call(options, option))
 		if (forgotten.length)
 			warn('%s %j not specified (locale %j use %j) in message %j with %j locale'
 			, type, forgotten, runtime.locale, types, runtime.id, runtime.locale)

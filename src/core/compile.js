@@ -1,7 +1,7 @@
 import {error} from 'core/utils'
 
 function bootstrap (settings, runtime, tags, module) {
-	if (runtime.hasOwnProperty(module.name) || tags.hasOwnProperty(module.name))
+	if (Object.hasOwnProperty.call(runtime, module.name) || Object.hasOwnProperty.call(tags, module.name))
 		return // skip if already initialized
 	module.dependencies.forEach(dependency => { // init dependencies
 		bootstrap(settings, runtime, tags, compile[dependency])

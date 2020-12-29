@@ -62,9 +62,8 @@ export function clean (source) {
 export function umd (name, factory) {
 	// small UMD loader
 	const loader = function (root, name, factory) {
-		/* global define: false, exports: false, module: false */
-		if ('function' === typeof define && define.amd)
-			define(name, factory())
+		if ('function' === typeof define && define.amd)// eslint-disable-line no-undef
+			define(name, factory()) // eslint-disable-line no-undef
 		else if ('object' === typeof exports)
 			module.exports = factory()
 		else

@@ -17,7 +17,7 @@ stdin.on('end', function () {
 		return console.error('messages must be valid JSON', error.message)
 	}
 	Array('date', 'number', 'time').forEach(option => {
-		if (options.hasOwnProperty(option))
+		if (Object.hasOwnProperty.call(options, option))
 			options[option] = JSON.parse(options[option])
 	})
 	options.plural = options.plural ? require(options.plural) : lookupPlural(require('../plurals.js'), options.locale)

@@ -8,7 +8,7 @@ export function error (message) {
 	const args = arguments
 	const types = {s: String, i: Number, o: JSON.stringify}
 	throw Error(message.replace(/%([soi])/g, function (placeholder, type) {
-		return args.hasOwnProperty(++index) ? types[type](args[index]) : placeholder
+		return Object.hasOwnProperty.call(args, ++index) ? types[type](args[index]) : placeholder
 	}))
 }
 

@@ -5,7 +5,7 @@ import noplural from 'modules/select/helpers/noplural'
 plural.dependencies = ['locale', 'select', 'num']
 
 function localePlural (settings) {
-	return settings.plural || localePlural.hasOwnProperty(settings.locale) && localePlural[settings.locale] || noplural
+	return settings.plural || Object.hasOwnProperty.call(localePlural, settings.locale) && localePlural[settings.locale] || noplural
 }
 
 if ('function' === typeof plurals)

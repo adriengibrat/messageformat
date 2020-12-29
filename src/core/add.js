@@ -5,12 +5,12 @@ export default function add (module, ...dependencies) {
 	if (!module || 'function' !== typeof module || !module.name)
 		error('you must provide a module as a named function')
 
-	if (compile.hasOwnProperty(module.name))
+	if (Object.hasOwnProperty.call(compile, module.name))
 		error('%j module is already defined', module.name)
 
 	compile[module.name] = Object.assign(module, {
 		dependencies: (module.dependencies || dependencies).map(dependency => {
-			if (!compile.hasOwnProperty(dependency))
+			if (!Object.hasOwnProperty.call(compile, dependency))
 				error('add %j dependency before requiring it in %j module', dependency, module.name)
 			return dependency
 		})

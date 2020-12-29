@@ -1,4 +1,4 @@
-import {error} from 'core/utils'
+import { error } from 'core/utils'
 
 export const ESC = `'`
 
@@ -25,7 +25,7 @@ function matching (open, close, escape, string, start = 0, end = string.length) 
 		// @todo test edge cases
 		// https://github.com/format-message/format-message/tree/master/packages/message-format#quote-escaping-rules
 		// http://userguide.icu-project.org/formatparse/messages#TOC-Quoting-Escaping
-		if (escape === token && /[\{\}]/.test(string.charAt(offset + 1))) {
+		if (escape === token && /[{}]/.test(string.charAt(offset + 1))) {
 			for (token = string.charAt(++offset); offset < end; token = string.charAt(++offset))
 				if (escape === token && escape !== string.charAt(offset + 1))
 					break // swallow until next (not escaped) escape char
