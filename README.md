@@ -1,5 +1,5 @@
 # messageformat
-The purpose of this package is to precompile messageformat messages as functions. 
+The purpose of this package is to precompile messages as optimised functions for translation with full messageformat support.
 
 ## Command Line Interface
 
@@ -22,9 +22,12 @@ or
 ```sh
 cat messages.json | messageformat [options]
 ```
+
 ex: 
 ```sh
-messageformat --locale en-US --currency --debug < messages.json | uglifyjs --beautify -- - > i18n.js
+messageformat --locale en-US --currency --debug < test/messages.json | npx uglifyjs --beautify > i18n.js
+
+messageformat --locale en-US --currency < test/messages.json | npx uglifyjs > i18n.min.js
 ```
 
 Options:
@@ -55,11 +58,13 @@ The `plural` generated js files are exported in [dist/plurals.js](dist/plurals.j
 
 Usage: 
 ```sh
-plural [options]
-```
-ex: 
-```sh
-plural | uglifyjs --beautify -- - > plurals.js
+plural | npx uglifyjs --beautify > dist/plurals.js
+
+plural | npx uglifyjs > dist/plurals.min.js
+
+plural --ordinal | npx uglifyjs --beautify > dist/ordinals.js
+
+plural --ordinal | npx uglifyjs > dist/ordinals.min.js
 ```
 
 Options:
@@ -73,11 +78,9 @@ The `currency` generated js file is exported in [dist/currencies.js](dist/curren
 
 Usage: 
 ```sh
-currency
-```
-ex: 
-```sh
-currency | uglifyjs --beautify -- - > currencies.js
+currency | npx uglifyjs --beautify > dist/currencies.js
+
+currency | npx uglifyjs > dist/currencies.min.js
 ```
 
 ### list
@@ -88,9 +91,7 @@ The `list` generated js file is exported in [dist/lists.js](dist/lists.js).
 
 Usage: 
 ```sh
-list
-```
-ex: 
-```sh
-list | uglifyjs --beautify -- - > currencies.js
+list | npx uglifyjs --beautify > dist/lists.js
+
+list | npx uglifyjs > dist/lists.min.js
 ```
