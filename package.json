@@ -95,7 +95,7 @@
   },
   "devDependencies": {
     "eslint": "^7.16.0",
-    "rollup": "^2.35.1",
+    "rollup": "^3.29.5",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-includepaths": "^0.2.4",
